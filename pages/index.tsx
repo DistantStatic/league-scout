@@ -1,9 +1,16 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import NavBar from '../components/navbar/navbar'
 
 export default function Home() {
-  return (
-    <h1>League Scout</h1>
-  )
+    return (
+        <div className="" style={{backgroundImage: "/CelebrationBg_Arcade_2019.png"}}>
+            <Head>
+                <title>
+                    League Scout
+                </title>
+            </Head>
+            <NavBar />
+            
+        </div>
+    )
 }
