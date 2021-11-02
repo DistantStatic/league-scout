@@ -14,17 +14,20 @@ export default function Account() {
                 setPuuid(data.puuid)
                 setProfilePic(data.profileIconId)
             })
+            .catch(err =>{
+
+            })
     }
 
     return(
-        <>
-            <h1>Account Details</h1>
+        <div className="container justify-center text-center py-4 ">
+            <span className=" text-2xl subpixel-antialiased ">Account Details</span>
             <br />
             <h3>{accountName}{' '}{puuid}</h3>
             {profilePic ? <Image src={`http://ddragon.leagueoflegends.com/cdn/11.21.1/img/profileicon/${profilePic}.png`} width={"100px"} height={"100px"}/> : ''}
             <br />
-            <input type="text" name="usename" id="username" onChange={(e) => setAccountName(e.target.value)}/>
-            <button onClick={() => getAccountDetails()}>Submit</button>
-        </>
+            <input type="text" name="usename" id="username" className="rounded-md mr-2 " onChange={(e) => setAccountName(e.target.value)}/>
+            <button className=" bg-green-400 rounded-md px-4 subpixel-antialiased " onClick={() => getAccountDetails()}>Submit</button>
+        </div>
     )
 }
