@@ -5,14 +5,21 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query
     axios({
         method: 'GET',
-        url: `by-name/${id}`
+        url: `summoner/v4/summoners/by-name/${id}`
     })
     .then(response => {
-        response.data.id
-        res.status(200).json(response.data)
+        axios({
+            method: 'GET',
+            url: `league/v4/entries/by-summoner/${response.data.id}`
+        })
+        .then(responseTwo => {
+            res.status(200).json({...response.data, ...responseTwo.data})
+        })
+        .catch(err => {
+            res.status(400).send(err)
+        })
     })
     .catch(err => {
-        console.log(err)
         res.status(400).send(err)
     })
 }

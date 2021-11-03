@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import NavBar from '../components/navbar/navbar'
 import FrontDirectory from '../containers/front-directory/front-directory'
+import { useState } from 'react'
 
 export default function Home() {
     return (
