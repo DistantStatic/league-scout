@@ -16,10 +16,13 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
             res.status(200).json({...response.data, ...responseTwo.data})
         })
         .catch(err => {
+            console.log(`error inner: ${err}`);
+            
             res.status(400).send(err)
         })
     })
     .catch(err => {
+        console.log(`error outer: ${err}`)
         res.status(400).send(err)
     })
 }
