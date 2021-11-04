@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import MainLayout from '../../components/layouts/main-layout';
 import BaseDetails from '../../components/account/base-details/base-details';
 import RankedDetails from '../../components/account/ranked-details/ranked-details';
+import Loader from '../../components/loader/loader';
 
 export default function AccountDetail(){
     const [baseDetails, setBaseDetails] = useState()
@@ -36,8 +37,8 @@ export default function AccountDetail(){
     return(
         <MainLayout home={false} title={ account }>
             <div className="container bg-gray-400 bg-opacity-60 h-96 rounded-md mx-auto align-middle mt-16 text-center ">
-                {typeof(baseDetails) === "undefined" ? <h1>"loading..."</h1>: <BaseDetails baseDetails={baseDetails} />}
-                {typeof(rankedSolo) === "undefined" ? '' : <RankedDetails rankedSolo={rankedSolo} rankedFlex={rankedFlex} />}
+                {typeof(baseDetails) === "undefined" ? <Loader /> : <BaseDetails baseDetails={baseDetails} />}
+                {typeof(rankedSolo) === "undefined" ? <Loader /> : <RankedDetails rankedSolo={rankedSolo} rankedFlex={rankedFlex} />}
             </div>
         </MainLayout>
     )
