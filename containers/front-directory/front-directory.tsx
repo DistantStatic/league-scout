@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import Account from "../../components/account/account"
 import DetailBar from "../../components/detail-bar/detail-bar"
 
