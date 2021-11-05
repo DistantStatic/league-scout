@@ -1,37 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from '../../../axios-instances/summoner';
+import { BuiltResponse } from "../../../interface-lib/account/account-lib";
 
-interface BuiltResponse {
-    base: AccountResponse,
-    rankedSolo: RankedResponse | null ,
-    rankedFlex: RankedResponse | null
-}
-
-interface AccountResponse {
-    id: string,
-    accountId: string,
-    puuid: string,
-    name: string,
-    profileIconId: number,
-    revisionDate: number,
-    summonerLevel: number
-}
-
-interface RankedResponse {
-    leagueId: string,
-    queueType: string,
-    tier: string,
-    rank: string,
-    summonerId: string,
-    summonerName: string,
-    leaguePoints: number,
-    wins: number,
-    losses: number,
-    veteran: boolean,
-    inactive: boolean,
-    freshBlood: boolean,
-    hotStreak: boolean
-}
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query
@@ -40,14 +10,13 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
         url: `summoner/v4/summoners/by-name/${id}`
     })
     .then(response => {
-        let builtResponse: BuiltResponse = {base: response.data, rankedSolo: null, rankedFlex: null}
+        let builtResponse: BuiltResponse = {base: response.data, rankedQueues: []}
         axios({
             method: 'GET',
             url: `league/v4/entries/by-summoner/${response.data.id}`
         })
         .then(responseTwo => {
-            if (responseTwo.data.length > 0) builtResponse.rankedSolo = responseTwo.data[0]
-            if (responseTwo.data.length > 1) builtResponse.rankedFlex = responseTwo.data[1]
+            builtResponse.rankedQueues = responseTwo.data
             res.status(200).json(builtResponse)
         })
         .catch(err => {

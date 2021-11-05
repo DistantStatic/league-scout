@@ -8,10 +8,7 @@ import Loader from '../../components/loader/loader';
 
 export default function AccountDetail(){
     const [loading, setLoading] = useState(true)
-    const [baseDetails, setBaseDetails] = useState()
-    const [rankedSolo, setRankedSolo] = useState()
-    const [rankedFlex, setRankedFlex] = useState()
-    
+    const [summonerInfo, setSummonerInfo] = useState({})
     const router = useRouter()
     const { account } = router.query
 
@@ -27,9 +24,7 @@ export default function AccountDetail(){
             .then(async (resp) => {
                 const data = await resp.json()
                 console.log(data)
-                setBaseDetails(data.base)
-                setRankedSolo(data.rankedSolo)
-                setRankedFlex(data.rankedFlex)
+                setSummonerInfo(data)
                 setLoading(false)
             })
             .catch(err =>{
@@ -42,7 +37,7 @@ export default function AccountDetail(){
         <MainLayout home={false} title={ account }>
             <div className="container bg-gray-400 bg-opacity-60 h-96 rounded-md mx-auto align-middle mt-16 text-center ">
                 <DetailBar />
-                {loading? <Loader /> : <><BaseDetails baseDetails={baseDetails} /> <RankedDetails rankedSolo={rankedSolo} rankedFlex={rankedFlex} /></>}
+                {loading ? <Loader /> : <><BaseDetails baseDetails={summonerInfo['base']} /> <RankedDetails queues={summonerInfo['rankedQueues']} /></>}
             </div>
         </MainLayout>
     )
