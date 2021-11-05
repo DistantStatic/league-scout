@@ -2,10 +2,10 @@ import Image from "next/image"
 
 export default function RankedDetails({rankedSolo, rankedFlex}) {
     return(
-        <div className=" justify-center flex">
+        <div className=" justify-center flex space-x-10 text-center">
             {rankedSolo ? 
                 <div>
-                    <span>Ranked Solo/Duo</span>
+                    <span className="text-xl">Ranked Solo/Duo</span>
                     <br/>
                     <Image src={`/emblems/${rankedSolo['tier']}.png`} width={"100px"} height={"100px"}/> 
                     <br />
@@ -16,7 +16,7 @@ export default function RankedDetails({rankedSolo, rankedFlex}) {
                 : ''}
             {rankedFlex ? 
                 <div>
-                    <span>Ranked Flex</span>
+                    <span className="text-xl">Ranked Flex</span>
                     <br/>
                     <Image src={`/emblems/${rankedFlex['tier']}.png`} width={"100px"} height={"100px"}/>   
                     <br />
