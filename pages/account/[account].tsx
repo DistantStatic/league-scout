@@ -25,17 +25,18 @@ export default function AccountDetail(){
                 const data = await resp.json()
                 console.log(data)
                 setSummonerInfo(data)
-                setLoading(false)
             })
             .catch(err =>{
                 console.log(err);
+            })
+            .finally(() => {
                 setLoading(false)
             })
     }
 
     return(
-        <MainLayout home={false} title={ account }>
-            <div className="container bg-gray-400 bg-opacity-60 h-96 rounded-md mx-auto align-middle mt-16 text-center ">
+        <MainLayout title={ account }>
+            <div className="container bg-gray-400 bg-opacity-60 h-5/6 rounded-md mx-auto align-middle mt-16 text-center ">
                 <DetailBar />
                 {loading ? <Loader /> : <><BaseDetails baseDetails={summonerInfo['base']} /> <RankedDetails queues={summonerInfo['rankedQueues']} /></>}
             </div>

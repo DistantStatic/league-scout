@@ -15,6 +15,12 @@ export default function Matches(){
             const data = await resp.json()
             setMatches(data)
         })
+        .catch(err => {
+            console.log(err)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
     }
 
     return (

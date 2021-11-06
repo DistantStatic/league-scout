@@ -3,7 +3,7 @@ import FrontDirectory from '../containers/front-directory/front-directory'
 
 export default function Home() {
     return (
-        <MainLayout home={true} title={"LeagueScout"}>
+        <MainLayout home title={"LeagueScout"}>
             <FrontDirectory />
         </MainLayout>
     )

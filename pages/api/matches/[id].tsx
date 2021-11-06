@@ -2,16 +2,22 @@ import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
-    const { account } = req.query
+    const { id } = req.query
     axios({
         method: "GET",
-        url: `match/v5/matches/by-puuid/${account}`
+        url: `summoner/v4/summoners/by-name/${id}`
     })
     .then(resp => {
-        res.status(200).send(fetchDetails(resp.data))
-    })
-    .catch(err => {
-        console.log(err)
+        axios({
+            method: "GET",
+            url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=0&count=20`
+        })
+        .then(resp => {
+            res.status(200).send(fetchDetails(resp.data))
+        })
+        .catch(err => {
+            console.log(err)
+        })
     })
 }
 
