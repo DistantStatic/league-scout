@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import MainLayout from "../../components/layouts/main-layout";
 import Loader from '../../components/loader/loader';
+import MatchHistory from '../../components/match-history/match-history';
 
 export default function Matches(){
     const [loading, setLoading] = useState(true)
@@ -9,10 +10,17 @@ export default function Matches(){
     const router = useRouter()
     const { account } = router.query
 
+    useEffect(() => {
+        console.log(account)
+        if(typeof(account) === "undefined") return;
+        fetchMatchHistory()
+    }, [account])
+
     function fetchMatchHistory() {
         fetch(`/api/matches/${account}`)
         .then(async (resp) => {
             const data = await resp.json()
+            console.log(data)
             setMatches(data)
         })
         .catch(err => {
@@ -25,7 +33,7 @@ export default function Matches(){
 
     return (
         <MainLayout home={false} title="Matches">
-            {loading ? <Loader /> : ""}
+            { loading ? <Loader /> : <MatchHistory matches={matches} /> }
         </MainLayout>
     )
 }
