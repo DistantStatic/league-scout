@@ -36,10 +36,12 @@ export default function AccountDetail(){
 
     return(
         <MainLayout title={ account }>
-            <div className="container bg-gray-400 bg-opacity-60 h-5/6 rounded-md mx-auto align-middle mt-16 text-center ">
-                <DetailBar />
-                {loading ? <Loader /> : <><BaseDetails baseDetails={summonerInfo['base']} /> <RankedDetails queues={summonerInfo['rankedQueues']} /></>}
-            </div>
+                {loading ? <Loader /> : 
+                    <div className="container bg-gray-400 bg-opacity-60 h-5/6 rounded-md mx-auto align-middle mt-16 text-center ">
+                        <DetailBar />
+                        <BaseDetails baseDetails={summonerInfo['base']} /> 
+                        <RankedDetails queues={summonerInfo['rankedQueues']} />
+                    </div>}
         </MainLayout>
     )
 }

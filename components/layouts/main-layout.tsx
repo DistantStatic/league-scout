@@ -11,7 +11,7 @@ export default function MainLayout({ children, home, title }: {children: ReactNo
                 </title>
             </Head>
             <NavBar home={home} />
-            <main className="h-5/6 overflow-y-scroll pt-4">
+            <main className="h-5/6 overflow-y-auto pt-8 ">
                 {children}
             </main>
         </div>
