@@ -10,7 +10,7 @@ export default function FrontDirectory(){
                 <span className=" text-2xl subpixel-antialiased ">Enter Summoner Name</span>
                 <br />
                 <input type="text" name="usename" id="username" className="rounded-md mr-2 " onChange={(e) => setAccountName(e.target.value)}/>
-                <Link href={`/account/${accountName}`}><button className=" bg-green-400 rounded-md px-4 subpixel-antialiased ">Submit</button></Link>
+                <Link href={`/summoner/${accountName}`}><button className=" bg-green-400 rounded-md px-4 subpixel-antialiased ">Submit</button></Link>
             </div>
         </div>
     )
