@@ -4,7 +4,7 @@ import ParticipantItem from "./participant/participant";
 export default function ParticipantList({participants}: {participants: Array<ParticipantDto>}){
 
     return(
-        <div className="flex w-full">
+        <div className="flex w-full space-x-1">
             {
                 //map out participants and split into teams
 
