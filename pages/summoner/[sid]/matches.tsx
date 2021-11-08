@@ -33,7 +33,7 @@ export default function Matches(){
     }
 
     return (
-        <MainLayout home={false} title="Matches">
+        <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
                 { loading ? <Loader /> : <MatchHistory matches={matches} /> }
             </SummonerDetail>
