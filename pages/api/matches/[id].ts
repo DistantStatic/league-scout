@@ -3,16 +3,18 @@ import matchAxios from '../../../axios-instances/match-history'
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
-    const { id } = req.query
+    const { id, page }: { [key: string]: string | string[] } = req.query
     axios({
         method: "GET",
         url: `summoner/v4/summoners/by-name/${id}`
     })
     .then(resp => {
-        console.log(`Puuid: ${resp.data.puuid}`)
+        //example: page 5 starts at match #80 ends at 99 (inclusive) therefore page 6 should start at ((6-1) * 20) = 100 if page is not present, start a 0
+        //plus negative number guard
+        const start = page && (Number(page) > 0) ? (Number(page) - 1) * 20 : 0
         matchAxios({
             method: "GET",
-            url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=0&count=20`
+            url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=${start}&count=20`
         })
         .then(resp => {
             Promise.all(fetchDetails(resp.data))

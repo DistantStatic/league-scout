@@ -4,14 +4,15 @@ import MainLayout from "../../../components/layouts/main-layout";
 import Loader from '../../../components/loader/loader';
 import MatchHistory from '../../../components/match-history/match-history';
 import SummonerDetail from '../../../components/layouts/summoner-detail';
-import Modal from '../../../components/layouts/modal/modal-layout';
 import MatchModal from '../../../components/modals/match-modal';
+import { match } from 'assert';
 
 export default function Matches(){
     const [loading, setLoading] = useState(true)
     const [matches, setMatches] = useState([])
-    const [matchModal, setMatchModal] = useState(true)
+    const [matchModal, setMatchModal] = useState(false)
     const [selectedMatch, setSelectedMatch] = useState(0)
+    const [page, setPage] = useState(0)
     const router = useRouter()
     const { sid } = router.query
 
@@ -19,10 +20,11 @@ export default function Matches(){
         console.log(sid)
         if(typeof(sid) === "undefined") return;
         fetchMatchHistory()
-    }, [sid])
+    }, [sid, page])
 
     function fetchMatchHistory() {
-        fetch(`/api/matches/${sid}`)
+        setLoading(true)
+        fetch(`/api/matches/${sid}?page=${page}`)
         .then(async (resp) => {
             const data = await resp.json()
             console.log(data)
@@ -41,12 +43,41 @@ export default function Matches(){
         setMatchModal(true)
     }
 
+    function changePage(forward: boolean) {
+        forward ? 
+            matches.length > 19 ? setPage(page + 1): '' 
+        : 
+            page > 0 ?setPage(page - 1) : ''
+    }
+
     return (
         <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
-                { loading ? <Loader /> : <MatchHistory matchSelector={matchSelection} matches={matches} /> }
+                <div className="relative w-full h-7">
+                    <button className="bg-green-300 rounded-r-lg h-full w-1/12 float-left"
+                        onClick={() => changePage(false)}
+                    >
+                        <span className="antialiased font-semibold text-xl">{'<'}</span>
+                    </button>
+                    <button className="bg-green-300 rounded-l-lg h-full w-1/12 float-right"
+                        onClick={() => changePage(true)}
+                    >
+                        <span className="antialiased font-semibold text-xl">{'>'}</span>
+                    </button>
+                </div>
+                { loading ? <Loader /> : 
+                    <>
+                        {matches.length > 0 ? <MatchHistory 
+                            matchSelector={matchSelection} 
+                            matches={matches}
+                            changePage={changePage}
+                            /> : ""}
+                    </>
+                }
             </SummonerDetail>
-                { loading ? '' : <MatchModal show={matchModal} hide={() => setMatchModal(false)} match={matches[selectedMatch]}/>}
+                { loading ? '' : 
+                    matches.length > 0 ? <MatchModal show={matchModal} hide={() => setMatchModal(false)} match={matches[selectedMatch]}/> : ''
+                }
         </MainLayout>
     )
 }

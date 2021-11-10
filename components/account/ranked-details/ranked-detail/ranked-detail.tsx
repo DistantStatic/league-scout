@@ -8,10 +8,10 @@ const rankedQueueType = {
 
 export default function RankedDetail({queue}: {queue: RankedResponse}){
     return(
-        <div className=" rounded-3xl bg-indigo-500 bg-opacity-30 w-1/5 h-full p-2 ">
+        <div className=" rounded-3xl bg-indigo-500 bg-opacity-60 w-1/5 h-full p-2 ">
             <span className="text-2xl">{rankedQueueType[queue.queueType]}</span>
             <br/>
-            <Image src={`/emblems/${queue['tier']}.png`} width={"150px"} height={"150px"}/> 
+            <Image src={`/static/emblems/${queue['tier']}.png`} width={"150px"} height={"150px"}/> 
             <br />
             <div className=" my-2 ">
                 <span className="text-xl">

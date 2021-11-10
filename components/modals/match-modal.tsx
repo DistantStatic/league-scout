@@ -34,12 +34,9 @@ export default function MatchModal({show, hide, match}: {show: boolean, hide?: (
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <ParticipantList participants={match.info.participants} detailed />
+                    <ParticipantList participants={match.info.participants} redWin={match.info.teams[0].win} detailed />
                 </div>
             </Modal.Body>
-            <Modal.Footer>
-                <h1>some text</h1>
-            </Modal.Footer>
         </Modal>
     )
 }
