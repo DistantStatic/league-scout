@@ -12,7 +12,7 @@ export default function Matches(){
     const [matches, setMatches] = useState([])
     const [matchModal, setMatchModal] = useState(false)
     const [selectedMatch, setSelectedMatch] = useState(0)
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState(1)
     const router = useRouter()
     const { sid } = router.query
 
@@ -47,7 +47,7 @@ export default function Matches(){
         forward ? 
             matches.length > 19 ? setPage(page + 1): '' 
         : 
-            page > 0 ?setPage(page - 1) : ''
+            page > 1 ?setPage(page - 1) : ''
     }
 
     return (
@@ -59,6 +59,7 @@ export default function Matches(){
                     >
                         <span className="antialiased font-semibold text-xl">{'<'}</span>
                     </button>
+                        <span className="rounded-full bg-green-300 text-transparent bg-clip-text text-2xl font-semibold"> {page} </span>
                     <button className="bg-green-300 rounded-l-lg h-full w-1/12 float-right"
                         onClick={() => changePage(true)}
                     >

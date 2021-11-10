@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function BaseDetails({baseDetails}: {baseDetails: {name: string, profileIconId: string}}) {
+export default function BaseDetails({baseDetails}: {baseDetails: {name: string, profileIconId: string, summonerLevel: string}}) {
     return(
         <div className="container justify-center text-center py-4 flex ">
             <div className="px-4">
@@ -13,8 +13,9 @@ export default function BaseDetails({baseDetails}: {baseDetails: {name: string, 
                     /> : ''
                 }
             </div>
-            <div className="px-4 flex items-center">
-                <span className="text-5xl pb-1">{baseDetails.name}</span>
+            <div className="px-4 flex flex-col items-center">
+                <span className="text-5xl pb-4">{`${baseDetails.name}`}</span>
+                <span className="text-3xl">{`Lvl: ${baseDetails.summonerLevel}`}</span>
             </div>
         </div>
     )

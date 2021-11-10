@@ -8,7 +8,7 @@ export default function DetailBarItem({ itemText, path, summoner }: {
     return(
         <Link href={`/summoner/${summoner}/${path}`}>
             <div className="bg-opacity-60 cursor-pointer px-4 rounded-t-md subpixel-antialiased bg-purple-300 ">
-                <span className="text-lg" >{itemText}</span>
+                <span className="text-xl" >{itemText}</span>
             </div>
         </Link>
     )

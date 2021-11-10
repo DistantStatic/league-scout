@@ -6,13 +6,13 @@ interface Pages {
 }
 
 const tabs: Array<Pages> = [
-    {display: "account", path: ""},
-    {display: "matches", path: "matches"}
+    {display: "Account", path: ""},
+    {display: "Matches", path: "matches"}
 ]
 
 export default function DetailBar({summoner} : {summoner: string | string[]}){
     return(
-        <div className=" h-8 w-full bg-indigo-900 rounded-t-md flex space-x-4 relative top-0 ">
+        <div className=" h-min w-full bg-indigo-900 rounded-t-md flex space-x-4 relative top-0 ">
             {
                 tabs.map((tab, index) => (
                     <DetailBarItem key={index} itemText={tab.display} path={tab.path} summoner={summoner} />

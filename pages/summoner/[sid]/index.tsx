@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import MainLayout from '../../../components/layouts/main-layout';
-import DetailBar from '../../../components/detail-bar/detail-bar';
 import BaseDetails from '../../../components/account/base-details/base-details';
 import RankedDetails from '../../../components/account/ranked-details/ranked-details';
 import Loader from '../../../components/loader/loader';
@@ -37,12 +36,14 @@ export default function AccountDetail(){
     return(
         <MainLayout title={ sid }>
             <SummonerDetail summoner={sid}>
-                {loading ? <Loader /> : 
-                    <>
-                        <BaseDetails baseDetails={summonerInfo['base']} /> 
-                        <RankedDetails queues={summonerInfo['rankedQueues']} />
-                    </>
-                }
+                <div className="mt-7">
+                    {loading ? <Loader /> : 
+                        <>
+                            <BaseDetails baseDetails={summonerInfo['base']} /> 
+                            <RankedDetails queues={summonerInfo['rankedQueues']} />
+                        </>
+                    }
+                </div>
             </SummonerDetail>
         </MainLayout>
     )
