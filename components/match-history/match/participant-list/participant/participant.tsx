@@ -33,6 +33,7 @@ export default function ParticipantItem({participant, team, detailed, playerSele
                         //DRY but complex
                         [...Array(2)].map((_, index) => (
                             <SummonerSpell
+                                key={index}
                                 spellSize={spellImageSize}
                                 spellKey={participant[`summoner${index + 1}Id`]} />
                         ))

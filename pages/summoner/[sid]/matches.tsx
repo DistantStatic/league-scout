@@ -20,7 +20,6 @@ export default function Matches(){
     const { sid } = router.query
 
     useEffect(() => {
-        console.log(sid)
         if(typeof(sid) === "undefined") return;
         fetchMatchHistory()
     }, [sid, page])
@@ -30,7 +29,6 @@ export default function Matches(){
         fetch(`/api/matches/${sid}?page=${page}`)
         .then(async (resp) => {
             const data = await resp.json()
-            console.log(data)
             setMatches(data)
         })
         .catch(err => {
@@ -48,8 +46,6 @@ export default function Matches(){
     }
 
     function playerSelection(playerIndex: number) {
-        
-        console.log(`match index : ${selectedMatch}\nplayer index: ${playerIndex}`)
         setSelectedPlayer(playerIndex)
         setPlayerModal(true)
     }

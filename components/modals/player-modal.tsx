@@ -41,6 +41,7 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                                 {
                                     [...Array(2)].map((_, index) => (
                                         <SummonerSpell
+                                            key={index}
                                             spellSize={"50"}
                                             spellKey={participant[`summoner${index + 1}Id`]} />
                                     ))

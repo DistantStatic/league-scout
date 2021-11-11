@@ -20,12 +20,10 @@ export default function AccountDetail(){
     }, [sid])
 
     function getAccountDetails() {
-        console.log('called')
         fetch(`/api/account/${ sid }`)
             .then(async (resp) => {
                 if (resp.status !== 200) return setError(true)  
                 const data = await resp.json()
-                console.log(data)
                 setSummonerInfo(data)
             })
             .catch(err =>{

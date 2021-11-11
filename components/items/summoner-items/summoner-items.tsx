@@ -14,7 +14,7 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                     {
                         //Summoner Items
                         [...Array(6)].map((_, itemPos) => (
-                            <div className={`${!detailed ? 'w-1/6' : 'w-1/3'}`}>
+                            <div key={itemPos} className={`${!detailed ? 'w-1/6' : 'w-1/3'}`}>
                                 <Image src={`/static/items/${participant[`item${itemPos}`]}.png`} height={itemImageSize} width={itemImageSize} />
                             </div>
                         ))
