@@ -37,7 +37,7 @@ export default function AccountDetail(){
 
     return(
         <MainLayout title={ sid }>
-            <SummonerDetail summoner={sid}>     
+            <SummonerDetail summoner={sid}>
                     <div className="mt-7">
                         {loading ? <Loader /> : 
                             !error ? 

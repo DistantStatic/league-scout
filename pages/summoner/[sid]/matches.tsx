@@ -17,7 +17,7 @@ export default function Matches(){
     const [selectedPlayer, setSelectedPlayer] = useState(0)
     const [page, setPage] = useState(1)
     const router = useRouter()
-    const { sid } = router.query
+    const { sid }: { [key: string]: string | string[] } = router.query
 
     useEffect(() => {
         if(typeof(sid) === "undefined") return;
@@ -60,19 +60,6 @@ export default function Matches(){
     return (
         <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
-                <div className="relative w-full h-7">
-                    <button className="bg-green-300 rounded-r-lg h-full w-1/12 float-left"
-                        onClick={() => changePage(false)}
-                    >
-                        <span className="antialiased font-semibold text-xl">{'<'}</span>
-                    </button>
-                        <span className="rounded-full bg-green-300 text-transparent bg-clip-text text-2xl font-semibold"> {page} </span>
-                    <button className="bg-green-300 rounded-l-lg h-full w-1/12 float-right"
-                        onClick={() => changePage(true)}
-                    >
-                        <span className="antialiased font-semibold text-xl">{'>'}</span>
-                    </button>
-                </div>
                 { loading ? <Loader /> : 
                     <>
                         {matches.length > 0 ? <MatchHistory 
@@ -81,7 +68,6 @@ export default function Matches(){
                             /> : ""}
                     </>
                 }
-            </SummonerDetail>
                 { loading ? '' : 
                     matches.length > 0 ? 
                     <>
@@ -99,6 +85,20 @@ export default function Matches(){
                     </> : ''
                 }
                 {error ? <h1>Something went wrong :(</h1> : ''}
+                <div className="absolute bottom-2 w-full h-7">
+                    <button className="bg-green-300 rounded-r-lg h-full w-1/12 float-left"
+                        onClick={() => changePage(false)}
+                    >
+                        <span className="antialiased font-semibold text-xl">{'<'}</span>
+                    </button>
+                        <span className="rounded-full bg-green-300 text-transparent bg-clip-text text-2xl font-semibold"> {page} </span>
+                    <button className="bg-green-300 rounded-l-lg h-full w-1/12 float-right"
+                        onClick={() => changePage(true)}
+                    >
+                        <span className="antialiased font-semibold text-xl">{'>'}</span>
+                    </button>
+                </div>
+            </SummonerDetail>
         </MainLayout>
     )
 }
