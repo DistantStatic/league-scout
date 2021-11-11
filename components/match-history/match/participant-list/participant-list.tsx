@@ -1,7 +1,12 @@
 import { ParticipantDto } from "../../../../interface-lib/match-lib.tsx/match-lib";
 import ParticipantItem from "./participant/participant";
 
-export default function ParticipantList({participants, detailed, redWin}: {participants: Array<ParticipantDto>, detailed?: boolean, redWin: boolean}){
+export default function ParticipantList({participants, detailed, redWin, playerSelector}: {
+    participants: Array<ParticipantDto>, 
+    detailed?: boolean, 
+    redWin: boolean,
+    playerSelector?: Function
+}){
 
     return(
         <div className="flex w-full space-x-1">
@@ -10,7 +15,14 @@ export default function ParticipantList({participants, detailed, redWin}: {parti
                     <div className="flex-col space-y-2">
                     {
                         participants.slice(0, 5).map((participant, index) =>(
-                            <ParticipantItem key={index} participant={participant} team={"red"} detailed={detailed}/>
+                            <ParticipantItem 
+                                key={index}
+                                playerIndex={index}
+                                participant={participant} 
+                                team={"red"} 
+                                detailed={detailed}
+                                playerSelector={playerSelector}
+                                />
                         ))
                     }
                     </div>
@@ -20,7 +32,14 @@ export default function ParticipantList({participants, detailed, redWin}: {parti
                 <div className="flex-col space-y-2">
                     {
                         participants.slice(5, 10).map((participant, index) =>(
-                            <ParticipantItem key={index} participant={participant} team={"blue"} detailed={detailed}/>
+                            <ParticipantItem 
+                                key={index + 5}
+                                playerIndex={index + 5}
+                                participant={participant} 
+                                team={"blue"} 
+                                detailed={detailed}
+                                playerSelector={playerSelector}
+                                />
                         ))
                     }
                 </div>

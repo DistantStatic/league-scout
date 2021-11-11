@@ -2,6 +2,10 @@ import axios from '../../../axios-instances/summoner'
 import matchAxios from '../../../axios-instances/match-history'
 import { NextApiRequest, NextApiResponse } from "next";
 
+//grabbing X matches at a time to prevent rate limiting
+//will change once backend storage of data is implemented
+const matchCount: number = 6
+
 export default function (req: NextApiRequest, res: NextApiResponse) {
     const { id, page }: { [key: string]: string | string[] } = req.query
     axios({
@@ -14,7 +18,7 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
         const start = page && (Number(page) > 0) ? (Number(page) - 1) * 20 : 0
         matchAxios({
             method: "GET",
-            url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=${start}&count=20`
+            url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=${start}&count=${matchCount}`
         })
         .then(resp => {
             Promise.all(fetchDetails(resp.data))

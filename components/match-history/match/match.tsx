@@ -23,7 +23,11 @@ const recursiveQueueFind = function (arr: Array<QueueDTO>, x:number, start:numbe
 
 }
 
-export default function MatchItem({match, matchSelector, matchIndex}: {match: Match, matchSelector: Function, matchIndex: number}) {
+export default function MatchItem({match, matchSelector, matchIndex}: {
+    match: Match, 
+    matchSelector: Function,
+    matchIndex: number
+}) {
     const date: Date = new Date(match.info.gameCreation)
     const queue: QueueDTO = recursiveQueueFind(QueueIds, match.info.queueId, 0, QueueIds.length)
     return(

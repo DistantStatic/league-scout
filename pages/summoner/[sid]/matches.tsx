@@ -5,13 +5,16 @@ import Loader from '../../../components/loader/loader';
 import MatchHistory from '../../../components/match-history/match-history';
 import SummonerDetail from '../../../components/layouts/summoner-detail';
 import MatchModal from '../../../components/modals/match-modal';
-import { match } from 'assert';
+import PlayerModal from '../../../components/modals/player-modal';
 
 export default function Matches(){
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     const [matches, setMatches] = useState([])
     const [matchModal, setMatchModal] = useState(false)
+    const [playerModal, setPlayerModal] = useState(true)
     const [selectedMatch, setSelectedMatch] = useState(0)
+    const [selectedPlayer, setSelectedPlayer] = useState(0)
     const [page, setPage] = useState(1)
     const router = useRouter()
     const { sid } = router.query
@@ -32,6 +35,7 @@ export default function Matches(){
         })
         .catch(err => {
             console.log(err)
+            setError(true)
         })
         .finally(() => {
             setLoading(false)
@@ -41,6 +45,13 @@ export default function Matches(){
     function matchSelection(index: number) {
         setSelectedMatch(index)
         setMatchModal(true)
+    }
+
+    function playerSelection(playerIndex: number) {
+        
+        console.log(`match index : ${selectedMatch}\nplayer index: ${playerIndex}`)
+        setSelectedPlayer(playerIndex)
+        setPlayerModal(true)
     }
 
     function changePage(forward: boolean) {
@@ -69,16 +80,29 @@ export default function Matches(){
                 { loading ? <Loader /> : 
                     <>
                         {matches.length > 0 ? <MatchHistory 
-                            matchSelector={matchSelection} 
+                            matchSelector={matchSelection}
                             matches={matches}
-                            changePage={changePage}
                             /> : ""}
                     </>
                 }
             </SummonerDetail>
                 { loading ? '' : 
-                    matches.length > 0 ? <MatchModal show={matchModal} hide={() => setMatchModal(false)} match={matches[selectedMatch]}/> : ''
+                    matches.length > 0 ? 
+                    <>
+                        <MatchModal 
+                            show={matchModal}
+                            hide={() => setMatchModal(false)}
+                            match={matches[selectedMatch]}
+                            playerSelector={playerSelection}
+                            />
+                        <PlayerModal 
+                            show={playerModal} 
+                            hide={() => setPlayerModal(false)} 
+                            participant={matches[selectedMatch]['info']['participants'][selectedPlayer]} 
+                            />
+                    </> : ''
                 }
+                {error ? <h1>Something went wrong :(</h1> : ''}
         </MainLayout>
     )
 }

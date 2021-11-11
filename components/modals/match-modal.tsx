@@ -10,7 +10,7 @@ interface QueueDTO {
     notes: string | null
 }
 
-const recursiveQueueFind = function (arr: Array<QueueDTO>, x:number, start:number, end:number) {
+const defineQueue = function (arr: Array<QueueDTO>, x:number, start:number, end:number) {
     if (start > end) return false
     
     const mid:number = Math.floor((start + end)/2)
@@ -18,14 +18,19 @@ const recursiveQueueFind = function (arr: Array<QueueDTO>, x:number, start:numbe
     if (arr[mid].queueId===x) return arr[mid]
     
     if(arr[mid].queueId > x)
-        return recursiveQueueFind(arr, x, start, mid - 1);
+        return defineQueue(arr, x, start, mid - 1);
     else
-        return recursiveQueueFind(arr, x, mid + 1, end);
+        return defineQueue(arr, x, mid + 1, end);
 
 }
 
-export default function MatchModal({show, hide, match}: {show: boolean, hide?: ()=>void, match: Match}) {
-    const queue: QueueDTO = recursiveQueueFind(QueueIds, match.info.queueId, 0, QueueIds.length)
+export default function MatchModal({show, hide, match, playerSelector}: {
+    show: boolean, 
+    hide?: ()=>void, 
+    match: Match,
+    playerSelector: Function
+}) {
+    const queue: QueueDTO = defineQueue(QueueIds, match.info.queueId, 0, QueueIds.length)
     return(
         <Modal show={show} hide={hide}>
             <Modal.Header>
@@ -34,7 +39,11 @@ export default function MatchModal({show, hide, match}: {show: boolean, hide?: (
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <ParticipantList participants={match.info.participants} redWin={match.info.teams[0].win} detailed />
+                    <ParticipantList
+                        participants={match.info.participants}
+                        redWin={match.info.teams[0].win}
+                        playerSelector={playerSelector}
+                        detailed />
                 </div>
             </Modal.Body>
         </Modal>
