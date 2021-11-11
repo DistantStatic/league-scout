@@ -68,22 +68,7 @@ export default function Matches(){
                             /> : ""}
                     </>
                 }
-                { loading ? '' : 
-                    matches.length > 0 ? 
-                    <>
-                        <MatchModal 
-                            show={matchModal}
-                            hide={() => setMatchModal(false)}
-                            match={matches[selectedMatch]}
-                            playerSelector={playerSelection}
-                            />
-                        <PlayerModal 
-                            show={playerModal} 
-                            hide={() => setPlayerModal(false)} 
-                            participant={matches[selectedMatch]['info']['participants'][selectedPlayer]} 
-                            />
-                    </> : ''
-                }
+                
                 {error ? <h1>Something went wrong :(</h1> : ''}
                 <div className="absolute bottom-2 w-full h-7">
                     <button className="bg-green-300 rounded-r-lg h-full w-1/12 float-left"
@@ -99,6 +84,22 @@ export default function Matches(){
                     </button>
                 </div>
             </SummonerDetail>
+            { loading ? '' : 
+                    matches.length > 0 ? 
+                    <>
+                        <MatchModal 
+                            show={matchModal}
+                            hide={() => setMatchModal(false)}
+                            match={matches[selectedMatch]}
+                            playerSelector={playerSelection}
+                            />
+                        <PlayerModal 
+                            show={playerModal} 
+                            hide={() => setPlayerModal(false)} 
+                            participant={matches[selectedMatch]['info']['participants'][selectedPlayer]} 
+                            />
+                    </> : ''
+                }
         </MainLayout>
     )
 }

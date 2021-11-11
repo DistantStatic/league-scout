@@ -1,7 +1,8 @@
 import MatchItem from "./match/match";
+import { Match } from "../../interface-lib/match-lib.tsx/match-lib";
 
 export default function MatchHistory({matches, matchSelector}: {
-    matches: Array<any>, 
+    matches: Array<Match>, 
     matchSelector: Function,
 }){
     return(
