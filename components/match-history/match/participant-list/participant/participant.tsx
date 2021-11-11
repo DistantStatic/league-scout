@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import { ParticipantDto } from "../../../../../interface-lib/match-lib.tsx/match-lib";
 import Image from 'next/image'
 import SummonerSpell from '../../../../spells/summoner-spells/summoner-spells';
+import SummonerItems from '../../../../items/summoner-items/summoner-items';
 
 export default function ParticipantItem({participant, team, detailed, playerSelector, playerIndex}: {
     playerIndex: number,
@@ -26,7 +26,7 @@ export default function ParticipantItem({participant, team, detailed, playerSele
             >
             <div className="flex flex-col w-2/5 justify-center">
                 <div className="flex flex-row justify-center">
-                    <Image src={`/static/champions/${participant.championName}.png`} height={champImageSize} width={champImageSize} />    
+                    <Image src={`/static/champions/${participant.championName}.png`} height={champImageSize} width={champImageSize} />
                 </div>
                 <div className="flex flex-row items-center justify-center">
                     {
@@ -54,42 +54,15 @@ export default function ParticipantItem({participant, team, detailed, playerSele
                     !detailed ? "" :
                     <div className="w-full flex flex-row space-x-8 justify-center">
                         <div>
-                            <span>
-                                {`Gold: ${participant.goldEarned}`}
-                            </span>
-                        </div>
-                        <div>
-                            <span>
-                                {`CS: ${participant.totalMinionsKilled}`}
-                            </span>
-                        </div>
-                        <div>
-                            <span>
-                                {`Level: ${participant.champLevel}`}
-                            </span>
+                            {participant.individualPosition}
                         </div>
                     </div>
                 }
-                <div className="flex flex-row flex-wrap">
-                    <div className="flex flex-col w-3/4">
-                        <div className="flex flex-row flex-wrap">
-                    {
-                        //Summoner Items
-                        [...Array(6)].map((_, itemPos) => (
-                            <div className={`${!detailed ? 'w-1/6' : 'w-1/3'}`}>
-                                <Image src={`/static/items/${participant[`item${itemPos}`]}.png`} height={itemImageSize} width={itemImageSize} />
-                            </div>
-                        ))
-                    }
-                        </div>
-                    </div>
-                    <div className="flex flex-col w-1/4">
-                        {
-                            //Trinket placed seperately
-                        }
-                        <div className="w-max"><Image src={`/static/items/${participant[`item6`]}.png`} height={itemImageSize} width={itemImageSize} /></div>
-                    </div>
-                </div>
+                <SummonerItems 
+                    participant={participant} 
+                    detailed={detailed} 
+                    itemImageSize={itemImageSize}
+                    />
             </div>
         </div>
     )

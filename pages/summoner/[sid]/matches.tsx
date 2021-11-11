@@ -12,7 +12,7 @@ export default function Matches(){
     const [error, setError] = useState(false)
     const [matches, setMatches] = useState([])
     const [matchModal, setMatchModal] = useState(false)
-    const [playerModal, setPlayerModal] = useState(true)
+    const [playerModal, setPlayerModal] = useState(false)
     const [selectedMatch, setSelectedMatch] = useState(0)
     const [selectedPlayer, setSelectedPlayer] = useState(0)
     const [page, setPage] = useState(1)

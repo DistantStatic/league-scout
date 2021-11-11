@@ -35,7 +35,7 @@ export default function MatchModal({show, hide, match, playerSelector}: {
         <Modal show={show} hide={hide}>
             <Modal.Header>
                 <span>{queue.description}</span>
-                <button className="bg-red-600 text-white w-10 absolute top-0 right-0 align-middle rounded-tr-md">X</button>
+                <button onClick={hide} className="bg-red-600 text-white w-10 absolute top-0 right-0 align-middle rounded-tr-md">X</button>
             </Modal.Header>
             <Modal.Body>
                 <div>
