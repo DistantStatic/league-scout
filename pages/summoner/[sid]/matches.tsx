@@ -56,7 +56,7 @@ export default function Matches(){
 
     function changePage(forward: boolean) {
         forward ? 
-            matches.length > 19 ? setPage(page + 1): '' 
+            matches.length > 5 ? setPage(page + 1): '' 
         : 
             page > 1 ?setPage(page - 1) : ''
     }
