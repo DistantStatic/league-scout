@@ -1,4 +1,4 @@
-import { Match } from "../../interface-lib/match-lib.tsx/match-lib";
+import { Match } from "../../interface-lib/match-lib/match-lib";
 import Modal from "../layouts/modal/modal-layout";
 import ParticipantList from "../match-history/match/participant-list/participant-list";
 import QueueIds from "../../game-constants/queue-ids.json"
@@ -29,7 +29,7 @@ export default function MatchModal({show, hide, match, playerSelector}: {
     hide?: ()=>void, 
     match: Match,
     playerSelector: Function
-}) {
+}):JSX.Element {
     const queue: QueueDTO = defineQueue(QueueIds, match.info.queueId, 0, QueueIds.length)
     return(
         <Modal show={show} hide={hide}>
@@ -39,6 +39,41 @@ export default function MatchModal({show, hide, match, playerSelector}: {
             </Modal.Header>
             <Modal.Body>
                 <div>
+                    <div className="w-full text-center pb-6">
+                        <span className="text-2xl">Team Stats</span>
+                    </div>
+                    <div className="flex flex-row pb-4">
+                        {
+                            match.info.teams.map(team => (
+                                <div className="flex flex-col w-1/2">
+                                    <div className="flex flex-col">
+                                        <div className="flex flex-col text-center">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Objective</th>
+                                                        <th>First</th>
+                                                        <th>Kills</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {Object.entries(team.objectives).map(entry => {
+                                                    console.log(entry)
+                                                    return (
+                                                            <tr>
+                                                                <td>{`${entry[0]}`}</td>
+                                                                <td className={`${entry[1].first? 'text-green-500': 'text-red-500'}`}>{`${entry[1].first}`}</td>
+                                                                <td>{`${entry[1].kills}`}</td>
+                                                            </tr>
+                                                        )})}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
                     <ParticipantList
                         participants={match.info.participants}
                         redWin={match.info.teams[0].win}

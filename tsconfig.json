@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "interface-lib/match-lib"  ],
   "exclude": [
     "node_modules"
   ]

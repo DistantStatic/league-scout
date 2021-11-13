@@ -1,4 +1,4 @@
-import { ParticipantDto } from "../../../../interface-lib/match-lib.tsx/match-lib";
+import { ParticipantDto } from "../../../../interface-lib/match-lib/match-lib";
 import ParticipantItem from "./participant/participant";
 
 export default function ParticipantList({participants, detailed, redWin, playerSelector}: {

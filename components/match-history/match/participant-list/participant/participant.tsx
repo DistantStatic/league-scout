@@ -1,4 +1,4 @@
-import { ParticipantDto } from "../../../../../interface-lib/match-lib.tsx/match-lib";
+import { ParticipantDto } from "../../../../../interface-lib/match-lib/match-lib";
 import Image from 'next/image'
 import SummonerSpell from '../../../../spells/summoner-spells/summoner-spells';
 import SummonerItems from '../../../../items/summoner-items/summoner-items';

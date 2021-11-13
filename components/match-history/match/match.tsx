@@ -1,4 +1,4 @@
-import { Match } from "../../../interface-lib/match-lib.tsx/match-lib"
+import { Match } from "../../../interface-lib/match-lib/match-lib"
 import ParticipantList from "./participant-list/participant-list"
 import QueueIds from "../../../game-constants/queue-ids.json"
 

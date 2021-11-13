@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Modal from '../../components/layouts/modal/modal-layout'
-import { ParticipantDto } from '../../interface-lib/match-lib.tsx/match-lib'
+import { ParticipantDto } from '../../interface-lib/match-lib/match-lib'
 import SummonerItems from '../items/summoner-items/summoner-items'
 import SummonerSpell from '../spells/summoner-spells/summoner-spells'
 

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ParticipantDto } from '../../../interface-lib/match-lib.tsx/match-lib'
+import { ParticipantDto } from '../../../interface-lib/match-lib/match-lib'
 
 export default function SummonerItems({participant, detailed, flat, itemImageSize}: {
     participant: ParticipantDto, 
