@@ -44,8 +44,8 @@ export default function MatchModal({show, hide, match, playerSelector}: {
                     </div>
                     <div className="flex flex-row pb-4">
                         {
-                            match.info.teams.map(team => (
-                                <div className="flex flex-col w-1/2">
+                            match.info.teams.map((team, index) => (
+                                <div className="flex flex-col w-1/2" key={index}>
                                     <div className="flex flex-col">
                                         <div className="flex flex-col text-center">
                                             <table>
