@@ -57,10 +57,10 @@ export default function MatchModal({show, hide, match, playerSelector}: {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {Object.entries(team.objectives).map(entry => {
+                                                {Object.entries(team.objectives).map((entry, index) => {
                                                     console.log(entry)
                                                     return (
-                                                            <tr>
+                                                            <tr key={index}>
                                                                 <td>{`${entry[0]}`}</td>
                                                                 <td className={`${entry[1].first? 'text-green-500': 'text-red-500'}`}>{`${entry[1].first}`}</td>
                                                                 <td>{`${entry[1].kills}`}</td>
