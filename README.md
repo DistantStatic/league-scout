@@ -1,5 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## League Scout
 
-An app to practice TypeScript and research League of Legends stats
+An webapp that allows you to research League of Legends stats and matches
+
+Built with NextJS, TypeScript, and TailwindCSS
