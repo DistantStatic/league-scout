@@ -1,12 +1,12 @@
 import axios from 'axios'
-import data from '../secret.json'
 
-const API_KEY: string = process.env.RIOT_API_KEY || data.RIOT_API_KEY
+const RIOT_API_KEY:string = process.env.RIOT_API_KEY
+const BASE_URL:string =  process.env.BASE_URL
 
 const instance = axios.create({
-    baseURL: `${data.BASE_URL}`,
+    baseURL: `${BASE_URL}`,
     headers: {
-        "X-Riot-Token": API_KEY
+        "X-Riot-Token": RIOT_API_KEY
     }
 })
 
