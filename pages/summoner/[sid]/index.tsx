@@ -38,17 +38,17 @@ export default function AccountDetail(){
     return(
         <MainLayout title={ sid }>
             <SummonerDetail summoner={sid}>
-                    <div className="mt-7">
-                        {loading ? <Loader /> : 
-                            !error ? 
-                                <>
-                                    <BaseDetails baseDetails={summonerInfo['base']} /> 
-                                    <RankedDetails queues={summonerInfo['rankedQueues']} />
-                                </>
-                            
-                            : <h1>Something went wrong :(</h1>
-                        }
-                    </div>
+                <div className="mt-7">
+                    {loading ? <Loader /> : 
+                        !error ? 
+                            <>
+                                <BaseDetails baseDetails={summonerInfo['base']} /> 
+                                <RankedDetails queues={summonerInfo['rankedQueues']} />
+                            </>
+                        
+                        : <h1>Something went wrong :(</h1>
+                    }
+                </div>
             </SummonerDetail>
         </MainLayout>
     )

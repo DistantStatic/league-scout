@@ -2,8 +2,8 @@ import Image from 'next/image'
 
 export default function BaseDetails({baseDetails}: {baseDetails: {name: string, profileIconId: string, summonerLevel: string}}) {
     return(
-        <div className="container justify-center text-center py-4 flex ">
-            <div className="px-4">
+        <div className="container justify-center text-center py-4 flex flex-row flex-wrap">
+            <div className="w-max flex-col">
                 {
                 baseDetails.profileIconId ? 
                 <Image 
