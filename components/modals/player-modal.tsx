@@ -145,7 +145,7 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                             </div>
                         </div>
                     </div>
-                    <div className="w-max mx-auto pt-4">
+                    <div className="w-full mx-auto pt-4 flex items-center">
                         <SummonerItems participant={participant} flat itemImageSize={"75"} />
                     </div>
                 </div>

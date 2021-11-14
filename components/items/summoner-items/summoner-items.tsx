@@ -25,7 +25,7 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                 {
                     //Trinket placed seperately
                 }
-                <div className="w-max"><Image src={`/static/items/${participant[`item6`]}.png`} height={itemImageSize} width={itemImageSize} /></div>
+                <div className=""><Image src={`/static/items/${participant[`item6`]}.png`} height={itemImageSize} width={itemImageSize} /></div>
             </div>
         </div>
     )
