@@ -15,7 +15,7 @@ export default function MainLayout({ children, home, title }: {children: ReactNo
                 {children}
             </main>
             <footer className="position absolute bottom-0 content-center w-full z-0">
-                <p className="text-gray-400 text-sm w-full xl:w-1/2 text-center content-center mx-auto"><i>{`LeagueScout™ isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially 
+                <p className="text-gray-400 text-xs md:text-sm w-full xl:w-1/2 text-center content-center mx-auto "><i>{`LeagueScout™ isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially 
                     involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or 
                     registered trademarks of Riot Games, Inc`}</i></p>
             </footer>
