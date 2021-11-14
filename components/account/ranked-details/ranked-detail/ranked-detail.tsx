@@ -8,7 +8,7 @@ const rankedQueueType = {
 
 export default function RankedDetail({queue}: {queue: RankedResponse}){
     return(
-        <div className=" rounded-3xl bg-indigo-800 bg-opacity-60">
+        <div className=" rounded-3xl bg-indigo-800 bg-opacity-60 my-2">
             <span className="text-2xl">{rankedQueueType[queue.queueType]}</span>
             <div className="h-full p-2 flex flex-row">
                 <div className="flex flex-col">

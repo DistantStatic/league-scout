@@ -3,7 +3,7 @@ import RankDetail from "./ranked-detail/ranked-detail"
 
 export default function RankedDetails({queues}: {queues: Array<RankedResponse>}) {
     return(
-        <div className=" justify-center flex flex-row flex-wrap px-5 text-center h-5/6 space-y-4 pt-4">
+        <div className=" justify-center flex flex-row flex-wrap px-5 text-center h-5/6 pt-4">
             {
                 queues.length > 0 ? queues.map((queue, index) =>(
                     <RankDetail queue={queue} key={index}/>
