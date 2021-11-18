@@ -16,10 +16,6 @@ export default function AccountDetail(){
 
     useEffect(() => {
         if(typeof(sid) === "undefined") return;
-        getAccountDetails()
-    }, [sid])
-
-    function getAccountDetails() {
         fetch(`/api/account/${ sid }`)
             .then(async (resp) => {
                 if (resp.status !== 200) return setError(true)  
@@ -33,7 +29,7 @@ export default function AccountDetail(){
             .finally(() => {
                 setLoading(false)
             })
-    }
+    }, [sid])
 
     return(
         <MainLayout title={ sid }>

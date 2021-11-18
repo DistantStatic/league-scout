@@ -3,7 +3,7 @@ import axios from '../../../axios-instances/summoner';
 import { BuiltResponse } from "../../../interface-lib/account/account-lib";
 
 
-export default function (req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query
     axios({
         method: 'GET',

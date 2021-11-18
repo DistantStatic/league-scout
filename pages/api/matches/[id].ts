@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 //will change once backend storage of data is implemented
 const matchCount: number = 6
 
-export default function (req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id, page }: { [key: string]: string | string[] } = req.query
     axios({
         method: "GET",

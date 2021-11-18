@@ -16,6 +16,7 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                             src={`http://ddragon.leagueoflegends.com/cdn/11.21.1/img/profileicon/${participant.profileIcon}.png`} 
                             width={"75px"} 
                             height={"75px"}
+                            alt={`Profile Icon ${participant.profileIcon}`}
                             />
                     </div>
                     <div className="flex flex-col pl-4">
@@ -35,7 +36,12 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                         </div>
                         <div className="flex flex-col justify-center">
                             <div className="flex flex-row justify-center">
-                                <Image src={`/static/champions/${participant.championName}.png`} height={"100"} width={"100"} />
+                                <Image 
+                                    src={`/static/champions/${participant.championName}.png`} 
+                                    height={"100"} 
+                                    width={"100"} 
+                                    alt={`${participant.championName} icon`}
+                                    />
                             </div>
                             <div className="flex flex-row items-center justify-center pb-2">
                                 {
@@ -152,7 +158,7 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
             </Modal.Body>
             <Modal.Footer>
                 <div className="mx-auto w-max">
-                    <Link href={`/summoner/${participant.summonerName}`}>
+                    <Link href={`/summoner/${participant.summonerName}`} passHref>
                     <button className=" bg-blue-600 w-max rounded-lg">
                         <span className="text-lg px-4">{'More Info...'}</span>
                     </button>

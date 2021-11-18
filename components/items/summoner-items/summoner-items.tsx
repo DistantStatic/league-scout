@@ -15,7 +15,12 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                         //Summoner Items
                         [...Array(6)].map((_, itemPos) => (
                             <div key={itemPos} className={`${!detailed ? 'w-1/6' : 'w-1/3'}`}>
-                                <Image src={`/static/items/${participant[`item${itemPos}`]}.png`} height={itemImageSize} width={itemImageSize} />
+                                <Image 
+                                    src={`/static/items/${participant[`item${itemPos}`]}.png`} 
+                                    height={itemImageSize} 
+                                    width={itemImageSize} 
+                                    alt={`${participant[`item${itemPos}`]}`}
+                                    />
                             </div>
                         ))
                     }
@@ -25,7 +30,14 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                 {
                     //Trinket placed seperately
                 }
-                <div className=""><Image src={`/static/items/${participant[`item6`]}.png`} height={itemImageSize} width={itemImageSize} /></div>
+                <div className="">
+                    <Image 
+                        src={`/static/items/${participant[`item6`]}.png`} 
+                        height={itemImageSize} 
+                        width={itemImageSize} 
+                        alt={`${participant[`item6`]}`}      
+                        />
+                </div>
             </div>
         </div>
     )

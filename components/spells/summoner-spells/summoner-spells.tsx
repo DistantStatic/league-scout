@@ -51,7 +51,12 @@ export default function SummonerSpell({spellKey, spellSize}: {spellKey: number, 
     const spellImg = findSpell(spellKey)
     return(
         <div>
-            <Image src={`/static/spells/summoner/${spellImg}`} width={spellSize} height={spellSize}></Image>
+            <Image 
+                src={`/static/spells/summoner/${spellImg}`} 
+                width={spellSize} 
+                height={spellSize} 
+                alt={`Spell ${spellKey}`}
+                />
         </div>
     )
 }

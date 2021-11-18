@@ -12,7 +12,12 @@ export default function RankedDetail({queue}: {queue: RankedResponse}){
             <span className="text-2xl">{rankedQueueType[queue.queueType]}</span>
             <div className="h-full p-2 flex flex-row">
                 <div className="flex flex-col">
-                    <Image src={`/static/emblems/${queue['tier']}.png`} width={"100px"} height={"100px"}/>
+                    <Image 
+                        src={`/static/emblems/${queue['tier']}.png`} 
+                        width={"100px"} 
+                        height={"100px"}
+                        alt={`Rank ${queue['tier']} Icon`}
+                        />
                 </div>
                 <div className="flex flex-col">
                     <span className="text-xl">

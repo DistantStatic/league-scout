@@ -26,7 +26,12 @@ export default function ParticipantItem({participant, team, detailed, playerSele
             >
             <div className="flex flex-col w-2/5 justify-center">
                 <div className="flex flex-row justify-center">
-                    <Image src={`/static/champions/${participant.championName}.png`} height={champImageSize} width={champImageSize} />
+                    <Image 
+                        src={`/static/champions/${participant.championName}.png`} 
+                        height={champImageSize} 
+                        width={champImageSize} 
+                        alt={`${participant.championName} icon`}
+                        />
                 </div>
                 <div className="flex flex-row items-center justify-center">
                     {

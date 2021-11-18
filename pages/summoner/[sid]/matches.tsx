@@ -27,12 +27,8 @@ export default function Matches(){
 
     useEffect(() => {
         if(typeof(sid) === "undefined") return;
-        fetchMatchHistory(currentPage)
-    }, [sid, currentPage])
-
-    function fetchMatchHistory(fetchPage: number) {
         setLoading(true)
-        fetch(`/api/matches/${sid}?page=${fetchPage}`)
+        fetch(`/api/matches/${sid}?page=${currentPage}`)
         .then(async (resp) => {
             const data = await resp.json()
             setMatches(data)
@@ -44,7 +40,7 @@ export default function Matches(){
         .finally(() => {
             setLoading(false)
         })
-    }
+    }, [sid, currentPage])
 
     function matchSelection(index: number) {
         setSelectedMatch(index)
