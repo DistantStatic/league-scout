@@ -8,7 +8,7 @@ const rankedQueueType = {
 
 export default function RankedDetail({queue}: {queue: RankedResponse}){
     return(
-        <div className=" rounded-3xl bg-indigo-800 bg-opacity-60 my-2">
+        <div className=" rounded-3xl bg-indigo-800 bg-opacity-60 my-2 p-4 sm:mx-4">
             <span className="text-2xl">{rankedQueueType[queue.queueType]}</span>
             <div className="h-full p-2 flex flex-row">
                 <div className="flex flex-col">
@@ -26,10 +26,14 @@ export default function RankedDetail({queue}: {queue: RankedResponse}){
                     <span className="text-xl">
                         {`LP: ${queue.leaguePoints}`}
                     </span>
-                    <span className="text-xl">
-
-                        {`Win: ${queue.wins} | Loss: ${queue.losses}`}
-                    </span>
+                    <div className="flex flex-row flex-wrap text-center items-center justify-center">
+                        <span className="text-xl px-2">
+                            {`Win: ${queue.wins}`}
+                        </span>
+                        <span className="text-xl">
+                            {`Loss: ${queue.losses}`}
+                        </span>
+                    </div>
                     <div className="flex flex-row space-x-2 justify-center">
                         { queue.inactive ? <span>💤</span> : "" }
                         { queue.hotStreak ? <span>🔥</span> : "" }
