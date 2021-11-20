@@ -58,7 +58,6 @@ export default function MatchModal({show, hide, match, playerSelector}: {
                                                 </thead>
                                                 <tbody>
                                                 {Object.entries(team.objectives).map((entry, index) => {
-                                                    console.log(entry)
                                                     return (
                                                             <tr key={index}>
                                                                 <td>{`${entry[0]}`}</td>

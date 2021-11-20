@@ -40,7 +40,9 @@ export default function MatchItem({match, matchSelector, matchIndex}: {
                     <span className="text-white">{`${queue.description}`}</span>
                     <span className="text-white">{`${date.toLocaleString()}`}</span>
                 </div>
-                <ParticipantList participants={match.info.participants} redWin={match.info.teams[0].win}/>
+                <ParticipantList 
+                    participants={match.info.participants} 
+                    redWin={match.info.teams[0].win}/>
             </div>
         </div>
     )

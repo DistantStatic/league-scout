@@ -3,7 +3,7 @@ import { Match } from "../../interface-lib/match-lib/match-lib";
 
 export default function MatchHistory({matches, matchSelector}: {
     matches: Array<Match>, 
-    matchSelector: Function,
+    matchSelector: Function
 }): JSX.Element{
     return(
         <>
