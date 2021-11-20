@@ -6,6 +6,7 @@ import MatchHistory from '../../../components/match-history/match-history';
 import SummonerDetail from '../../../components/layouts/summoner-detail';
 import MatchModal from '../../../components/modals/match-modal';
 import PlayerModal from '../../../components/modals/player-modal';
+import SummonerContext from '../../../components/context-providers/summoner-context';
 
 export default function Matches(){
     const router = useRouter()
@@ -63,6 +64,7 @@ export default function Matches(){
     }
 
     return (
+        <SummonerContext summoner={`${sid}`}>
         <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
                 { loading ? <Loader /> : 
@@ -106,5 +108,6 @@ export default function Matches(){
                     </> : ''
                 }
         </MainLayout>
+        </SummonerContext>
     )
 }
