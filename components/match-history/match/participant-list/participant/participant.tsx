@@ -4,6 +4,7 @@ import SummonerSpell from '../../../../spells/summoner-spells/summoner-spells';
 import SummonerItems from '../../../../items/summoner-items/summoner-items';
 import { useContext } from 'react'
 import { summonerContext } from "../../../../context-providers/summoner-context";
+import classes from './participant.module.css'
 
 export default function ParticipantItem({participant, team, detailed, playerSelector, playerIndex}: {
     playerIndex: number,
@@ -24,7 +25,7 @@ export default function ParticipantItem({participant, team, detailed, playerSele
 
     return(
         <div 
-            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() === highlight.summoner ? 'bg-yellow-300' : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
+            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() === highlight.summoner ? `bg-yellow-300 ${classes.focusedPlayer}` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
             onClick={()=>playerSelection()}
             >
             <div className="flex flex-col w-2/5 justify-center">

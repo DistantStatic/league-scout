@@ -1,0 +1,6 @@
+.focusedPlayer {
+    text-shadow:    -.25px .25px  #000,
+                    .25px .25px  #000,
+                    .25px -.25px  #000,
+                    -.25px -.25px  #000;;
+}
