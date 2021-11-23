@@ -1,18 +1,16 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, SetStateAction, useState } from "react";
 
-const contextDetail = {
-    summoner: ''
-}
+export const SummonerContext = React.createContext<[string, React.Dispatch<SetStateAction<string>>]>([
+    '',
+    ()=>{}
+])
 
-export const summonerContext = React.createContext(contextDetail)
+export default function SummonerContextProvider({ children }: { children: ReactNode }){
+    const [summoner, setSummoner] = useState('')
 
-export default function SummonerContext({summoner, children }: {summoner: string, children: ReactNode}){
-    
-    contextDetail.summoner = summoner
-    
     return(
-        <summonerContext.Provider value={contextDetail} >
+        <SummonerContext.Provider value={[summoner, setSummoner]} >
             {children}
-        </summonerContext.Provider>
+        </SummonerContext.Provider>
     )
 }

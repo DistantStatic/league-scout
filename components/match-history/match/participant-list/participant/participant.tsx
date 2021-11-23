@@ -1,9 +1,9 @@
 import { ParticipantDto } from "../../../../../interface-lib/match-lib/match-lib";
 import Image from 'next/image'
+import { useContext, useEffect } from 'react'
 import SummonerSpell from '../../../../spells/summoner-spells/summoner-spells';
 import SummonerItems from '../../../../items/summoner-items/summoner-items';
-import { useContext } from 'react'
-import { summonerContext } from "../../../../context-providers/summoner-context";
+import { SummonerContext } from "../../../../context-providers/summoner-context";
 import classes from './participant.module.css'
 
 export default function ParticipantItem({participant, team, detailed, playerSelector, playerIndex}: {
@@ -17,15 +17,15 @@ export default function ParticipantItem({participant, team, detailed, playerSele
     const champImageSize:string = !detailed ? "50" : "100"
     const itemImageSize:string = !detailed ? "25" : "50"
     const spellImageSize:string = !detailed ? "25" : "50"
-    const highlight = useContext(summonerContext)
+    const [ summoner ] = useContext(SummonerContext)
 
     function playerSelection(){
         detailed? playerSelector(playerIndex): ''
     }
-
+    console.log(summoner)
     return(
         <div 
-            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() === highlight.summoner ? `bg-yellow-300 ${classes.focusedPlayer}` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
+            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() == summoner ? `bg-yellow-300 ${classes.focusedPlayer}` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
             onClick={()=>playerSelection()}
             >
             <div className="flex flex-col w-2/5 justify-center">
