@@ -6,7 +6,7 @@ import MatchHistory from '../../../components/match-history/match-history';
 import SummonerDetail from '../../../components/layouts/summoner-detail';
 import MatchModal from '../../../components/modals/match-modal';
 import PlayerModal from '../../../components/modals/player-modal';
-import SummonerContextProvider, { SummonerContext } from '../../../components/context-providers/summoner-context';
+import SummonerContextProvider from '../../../components/context-providers/summoner-context';
 
 export default function Matches(){
     const router = useRouter()
@@ -20,7 +20,6 @@ export default function Matches(){
     const [selectedMatch, setSelectedMatch] = useState(0)
     const [selectedPlayer, setSelectedPlayer] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
-    const [summoner, setSummoner] = useContext(SummonerContext)    
 
     //would be nice to find a better way, this causes 2 api calls.
     useEffect(() => {
@@ -29,9 +28,6 @@ export default function Matches(){
 
     useEffect(() => {
         if(typeof(sid) === "undefined") return;
-        console.log(`Matches: ${sid} `)
-        setSummoner(sid.toString());
-        console.log(`After set: ${summoner}`)
         setLoading(true)
         fetch(`/api/matches/${sid}?page=${currentPage}`)
         .then(async (resp) => {
@@ -68,7 +64,7 @@ export default function Matches(){
     }
 
     return (
-        <SummonerContextProvider>
+        <SummonerContextProvider summonerName={sid}>
         <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
                 { loading ? <Loader /> : 
