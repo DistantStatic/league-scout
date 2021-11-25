@@ -1,29 +1,51 @@
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
-import Loader from "../../../components/loader/loader"
 
-export default function CurrentMatch() {
+import MainLayout from "../../../components/layouts/main-layout"
+import SummonerDetail from "../../../components/layouts/summoner-detail"
+import Loader from "../../../components/loader/loader"
+import CurrentMatch from "../../../components/current-match/current-match"
+
+export default function CurrentMatchPage() {
     const [ inGame, setInGame ] = useState(false)
     const [ loading, setLoading ] = useState(true)
+    const [ matchData, setMatchData ] = useState()
+    
     const router = useRouter()
     const { sid }: { [key: string]: string | string[] } = router.query
 
     useEffect(() => {
-
+        setLoading(true)
+        if (sid === undefined) return
+        console.log(sid)
+        fetch(`/api/current/${sid}`)
+        .then(async resp => {
+            resp.status === 200 ? setInGame(true) : setInGame(false)
+            setMatchData(await resp.json())
+        })
+        .catch(err => {
+            setInGame(false)
+            console.error(err)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
     }, [sid])
 
     return (
-        <>
+        <MainLayout home={false} title={` ${sid} - Current`}>
+            <SummonerDetail summoner={sid}>
             {
                 loading ? 
                     <Loader /> 
                     :
                     inGame ?
-                        ''// show current game data
+                        // show current game data
+                        <CurrentMatch matchData={matchData} playerSelector={()=>{}}/>
                         :
-                        ''// show not in game message
-                    
+                        'Not in game'// show not in game message
             }
-        </>
+            </SummonerDetail>
+        </MainLayout>
     )
 }

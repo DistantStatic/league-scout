@@ -181,3 +181,44 @@ export interface ObjectiveDto {
     first: boolean,
     kills: number
 }
+
+export interface CurrentMatchDto {
+    gameId: number,
+    gameType: string,
+    gameStartTime: number,
+    mapId: number,
+    gameLength: number,
+    platformId: string,
+    gameMode: string,
+    bannedChampions: Array<BannedChampion>,
+    gameQueueConfigId: number,
+    observers: Observer,
+    participants: Array<CurrentGameParticipant>
+}
+
+export interface BannedChampion {
+    pickTurn: number,
+    championId: number,
+    teamId: number
+}
+
+export interface Observer {
+    encryptionKey: string
+}
+
+export interface CurrentGameParticipant {
+    championId: number,
+    perks: PerksDto,
+    profileIcon: number,
+    bot: boolean,
+    teamId: number,
+    summonerName: string,
+    spell1Id: number,
+    spell2Id: number,
+    gameCusomizationObjects: Array<GameCustomizationObject>
+}
+
+export interface GameCustomizationObject {
+    category: string,
+    content: string
+}

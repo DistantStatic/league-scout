@@ -4,7 +4,7 @@ import ParticipantItem from "./participant/participant";
 export default function ParticipantList({participants, detailed, redWin, playerSelector}: {
     participants: Array<ParticipantDto>, 
     detailed?: boolean, 
-    redWin: boolean,
+    redWin?: boolean,
     playerSelector?: Function
 }){
 

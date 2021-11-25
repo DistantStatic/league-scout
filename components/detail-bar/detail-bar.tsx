@@ -7,7 +7,8 @@ interface Pages {
 
 const tabs: Array<Pages> = [
     {display: "Account", path: ""},
-    {display: "Matches", path: "matches"}
+    {display: "Matches", path: "matches"},
+    {display: "Current Match", path:"current"}
 ]
 
 export default function DetailBar({summoner} : {summoner: string | string[]}){
