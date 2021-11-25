@@ -6,7 +6,7 @@ export default function PlayerList({playerList, playerSelector}: {
     playerSelector: Function
 }){
     return(
-        <div className="flex w-full space-x-1">
+        <div className="flex w-full flex-row flex-wrap">
             <div className={`container w-1/2 flex-col bg-opacity-40 text-center rounded-xl `}>
                 <div className="flex-col space-y-2">
                 {

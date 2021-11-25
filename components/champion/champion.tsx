@@ -14,7 +14,7 @@ export default function Champion({name, cid, height, width}: {
     useEffect(() => {
         name && name.length > 0 ? setChampName(name) :
         Object.keys(Champions.data).forEach( champ =>{
-            if (Champions.data[champ].id === cid){
+            if (Number(Champions.data[champ].key) === cid){
                 setChampName(champ)
                 return
             }
