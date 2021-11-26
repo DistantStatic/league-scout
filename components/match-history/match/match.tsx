@@ -37,7 +37,7 @@ export default function MatchItem({match, matchSelector, matchIndex}: {
             className={` h-auto w-auto my-2.5 bg-no-repeat bg-center bg-cover rounded-xl text-white mx-2 cursor-pointer`}>
             <div className=" bg-black bg-opacity-30 rounded-2xl border-2 border-black border-opacity-30 w-full h-full">
                 <div className="flex flex-row pb-2 space-x-8 justify-center">
-                    <span className="text-white">{`${queue.description}`}</span>
+                    <span className="text-white">{`${queue.description.replace('games','')}`}</span>
                     <span className="text-white">{`${date.toLocaleString()}`}</span>
                 </div>
                 <ParticipantList 
