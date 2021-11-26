@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
-import router from 'next/router';
+import { useRouter } from 'next/router';
+import Link from 'next/link'
 
 import { CurrentGameParticipant } from "../../../../interface-lib/match-lib/match-lib";
 import SummonerSpell from '../../../spells/summoner-spells/summoner-spells';
@@ -15,7 +16,6 @@ export default function Player({player, playerIndex, team, playerSelector}: {
 }) {
 
     const champImageSize:string =  "50"
-    const itemImageSize:string =  "25"
     const spellImageSize:string =  "25"
     const [ summoner ] = useContext(SummonerContext)
 
@@ -23,8 +23,8 @@ export default function Player({player, playerIndex, team, playerSelector}: {
     const [error, setError] = useState(false)
     const [loading, setLoading ] = useState(true)
 
-    
-    const { sid } = router.query
+    const router = useRouter()
+    const { sid }: { [key: string]: string | string[] } = router.query
 
     useEffect(() => {
         if(typeof(player) === "undefined") return;
@@ -43,12 +43,16 @@ export default function Player({player, playerIndex, team, playerSelector}: {
             })
     }, [sid])
 
-    console.log(summoner)
     return(
-        <div 
-            className={`rounded-xl border-2 border-black cursor-pointer ${ player.summonerName.toLocaleLowerCase() == summoner ? `bg-yellow-300 text-black font-medium` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
-            onClick={()=>playerSelector()}
-            >
+        <Link href={`/summoner/${player.summonerName}`} passHref>
+        <div className={`rounded-xl 
+                        border-2 
+                        border-black 
+                        cursor-pointer 
+                        ${ player.summonerName.toLocaleLowerCase() === sid.toLocaleString().toLocaleLowerCase() ?
+                         `bg-yellow-300 text-black font-medium` 
+                         : team === "red" ? " bg-red-600 " : " bg-blue-600 "} 
+                        flex flex-row`}>
             <div className="flex flex-col w-1/5 justify-center">
                 <div className="flex flex-row justify-center">
                     <Champion 
@@ -85,5 +89,6 @@ export default function Player({player, playerIndex, team, playerSelector}: {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }

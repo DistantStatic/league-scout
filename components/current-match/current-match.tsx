@@ -8,7 +8,7 @@ export default function CurrentMatch({matchData, playerSelector}: {
 }){
 
     return (
-        <div>
+        <div className="py-2">
             <PlayerList playerList={matchData.participants} playerSelector={playerSelector} />
         </div>
     )

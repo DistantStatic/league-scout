@@ -24,7 +24,7 @@ export default function ParticipantItem({participant, team, detailed, playerSele
     console.log(summoner)
     return(
         <div 
-            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() == summoner ? `bg-yellow-300 text-black font-medium` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
+            className={`rounded-xl border-2 border-black cursor-pointer ${ participant.summonerName.toLocaleLowerCase() == summoner.toLocaleLowerCase() ? `bg-yellow-300 text-black font-medium` : team === "red" ? " bg-red-600 " : " bg-blue-600 "} flex flex-row`}
             onClick={()=>playerSelection()}
             >
             <div className="flex flex-col w-2/5 justify-center">

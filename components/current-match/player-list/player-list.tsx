@@ -7,8 +7,7 @@ export default function PlayerList({playerList, playerSelector}: {
 }){
     return(
         <div className="flex w-full flex-row flex-wrap">
-            <div className={`container w-1/2 flex-col bg-opacity-40 text-center rounded-xl `}>
-                <div className="flex-col space-y-2">
+            <div className="container sm:w-1/2 flex-col bg-opacity-40 text-center rounded-xl space-y-2">
                 {
                     playerList.slice(0, 5).map((participant, index) =>(
                         <Player 
@@ -20,10 +19,8 @@ export default function PlayerList({playerList, playerSelector}: {
                             />
                     ))
                 }
-                </div>
             </div>
-            <div className={`container w-1/2 flex-col bg-opacity-40 text-center rounded-xl `}>
-                <div className="flex-col space-y-2">
+            <div className="container sm:w-1/2 flex-col bg-opacity-40 text-center rounded-xl space-y-2">
                 {
                     playerList.slice(5, 10).map((participant, index) =>(
                         <Player 
@@ -35,7 +32,6 @@ export default function PlayerList({playerList, playerSelector}: {
                             />
                     ))
                 }
-                </div>
             </div>
         </div>
     )

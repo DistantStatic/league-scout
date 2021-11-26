@@ -5,8 +5,10 @@ export default function RankDetail({queue}: {
     queue: RankedResponse
 }) {
     return(
-                <div className="h-full p-2 flex flex-row">
-                <div className="flex flex-col">
+            <>
+            { queue.tier !== undefined ?
+            <div className="h-full p-2 flex flex-row text-sm justify-center">
+                <div className="flex flex-col justify-center">
                     <Image 
                         src={`/static/emblems/${queue['tier']}.png`} 
                         width={"50px"} 
@@ -14,18 +16,18 @@ export default function RankDetail({queue}: {
                         alt={`Rank ${queue['tier']} Icon`}
                         />
                 </div>
-                <div className="flex flex-col">
-                    <span className="text-xl">
+                <div className="flex flex-col justify-center">
+                    <span className="">
                         {`${queue.tier} ${queue.rank}`}
                     </span>
-                    <span className="text-xl">
+                    <span className="">
                         {`LP: ${queue.leaguePoints}`}
                     </span>
                     <div className="flex flex-row flex-wrap text-center items-center justify-center">
-                        <span className="text-xl px-2">
+                        <span className="px-2">
                             {`Win: ${queue.wins}`}
                         </span>
-                        <span className="text-xl">
+                        <span className="">
                             {`Loss: ${queue.losses}`}
                         </span>
                     </div>
@@ -37,5 +39,8 @@ export default function RankDetail({queue}: {
                     </div>
                 </div>
             </div>
+        : ''
+        }
+        </>
     )
 }

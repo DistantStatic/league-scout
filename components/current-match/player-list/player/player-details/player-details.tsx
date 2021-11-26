@@ -27,8 +27,8 @@ export default function PlayerDetails({baseDetails, rankedDetails}: {
                 }
             </div>
             <div className=" flex flex-col items-center">
-                <span className="text-xl pb-4">{`${baseDetails.name}`}</span>
-                <span className="text-lg">{`Lvl: ${baseDetails.summonerLevel}`}</span>
+                <span className="text-base pb-4">{`${baseDetails.name}`}</span>
+                <span className="text-sm">{`Lvl: ${baseDetails.summonerLevel}`}</span>
             </div>
         </div>
         {
