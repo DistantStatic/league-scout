@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 
 import { CurrentGameParticipant } from "../../../../interface-lib/match-lib/match-lib";
 import SummonerSpell from '../../../spells/summoner-spells/summoner-spells';
-import { SummonerContext } from '../../../context-providers/summoner-context';
 import Champion from '../../../champion/champion';
 import PlayerDetails from './player-details/player-details';
 
@@ -17,7 +16,6 @@ export default function Player({player, playerIndex, team, playerSelector}: {
 
     const champImageSize:string =  "50"
     const spellImageSize:string =  "25"
-    const [ summoner ] = useContext(SummonerContext)
 
     const [summonerInfo, setSummonerInfo ] = useState({})
     const [error, setError] = useState(false)
@@ -41,7 +39,7 @@ export default function Player({player, playerIndex, team, playerSelector}: {
             .finally(() => {
                 setLoading(false)
             })
-    }, [sid])
+    }, [sid, player])
 
     return(
         <Link href={`/summoner/${player.summonerName}`} passHref>

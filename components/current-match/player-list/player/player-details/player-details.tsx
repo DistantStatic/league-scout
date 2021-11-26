@@ -32,9 +32,9 @@ export default function PlayerDetails({baseDetails, rankedDetails}: {
             </div>
         </div>
         {
-            rankedDetails.map( queue => (
-                <RankDetail queue={queue} />
-            )
+            rankedDetails.map( (queue, index) => (
+                    <RankDetail queue={queue} key={index} />
+                )
             )
         }
         </div>
