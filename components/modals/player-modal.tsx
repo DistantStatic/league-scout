@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Modal from '../../components/layouts/modal/modal-layout'
+
 import { ParticipantDto } from '../../interface-lib/match-lib/match-lib'
 import SummonerItems from '../items/summoner-items/summoner-items'
 import SummonerSpell from '../spells/summoner-spells/summoner-spells'
+import Champion from '../champion/champion'
 
 export default function PlayerModal({show, hide, participant}:{show: boolean, hide: ()=>void, participant: ParticipantDto}){
 
@@ -36,11 +38,10 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                         </div>
                         <div className="flex flex-col justify-center">
                             <div className="flex flex-row justify-center">
-                                <Image 
-                                    src={`/static/champions/${participant.championName}.png`} 
+                                <Champion
+                                    name={`${participant.championName}`} 
                                     height={"100"} 
                                     width={"100"} 
-                                    alt={`${participant.championName} icon`}
                                     />
                             </div>
                             <div className="flex flex-row items-center justify-center pb-2">
@@ -151,7 +152,7 @@ export default function PlayerModal({show, hide, participant}:{show: boolean, hi
                             </div>
                         </div>
                     </div>
-                    <div className="w-full mx-auto pt-4 flex items-center">
+                    <div className="w-full mx-auto pt-4 flex justify-center">
                         <SummonerItems participant={participant} flat itemImageSize={"75"} />
                     </div>
                 </div>

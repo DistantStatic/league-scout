@@ -23,7 +23,7 @@ export default function Champion({name, cid, height, width}: {
 
     return(
         <Image
-        src={`/static/champions/${champName}.png`}
+        src={`https://ddragon.leagueoflegends.com/cdn/11.23.1/img/champion/${champName}.png`}
         height={height}
         width={width}
         alt={`${champName}`}

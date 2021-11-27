@@ -19,7 +19,7 @@ export default function PlayerDetails({baseDetails, rankedDetails}: {
                 {
                 baseDetails.profileIconId ? 
                 <Image 
-                    src={`https://ddragon.leagueoflegends.com/cdn/11.21.1/img/profileicon/${baseDetails.profileIconId}.png`} 
+                    src={`https://ddragon.leagueoflegends.com/cdn/11.23.1/img/profileicon/${baseDetails.profileIconId}.png`} 
                     width={"25px"} 
                     height={"25px"}
                     alt={`Profile Icon ${baseDetails.profileIconId}`}

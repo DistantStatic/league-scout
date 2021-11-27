@@ -16,7 +16,12 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                         [...Array(6)].map((_, itemPos) => (
                             <div key={itemPos} className={`${!detailed ? 'w-1/6' : 'w-1/3'}`}>
                                 <Image 
-                                    src={`/static/items/${participant[`item${itemPos}`]}.png`} 
+                                    src={
+                                        participant[`item${itemPos}`] !== 0 ? 
+                                        `https://ddragon.leagueoflegends.com/cdn/11.23.1/img/item/${participant[`item${itemPos}`]}.png` :
+                                        'https://ddragon.leagueoflegends.com/cdn/img/bg/A6000000.png'
+                                        
+                                    } 
                                     height={itemImageSize} 
                                     width={itemImageSize} 
                                     alt={`${participant[`item${itemPos}`]}`}
@@ -32,7 +37,11 @@ export default function SummonerItems({participant, detailed, flat, itemImageSiz
                 }
                 <div className="">
                     <Image 
-                        src={`/static/items/${participant[`item6`]}.png`} 
+                        src={
+                            participant[`item6`] !== 0 ? 
+                            `https://ddragon.leagueoflegends.com/cdn/11.23.1/img/item/${participant[`item6`]}.png` :
+                            'https://ddragon.leagueoflegends.com/cdn/img/bg/A6000000.png'
+                        }
                         height={itemImageSize} 
                         width={itemImageSize} 
                         alt={`${participant[`item6`]}`}      

@@ -52,7 +52,7 @@ export default function SummonerSpell({spellKey, spellSize}: {spellKey: number, 
     return(
         <div>
             <Image 
-                src={`/static/spells/summoner/${spellImg}`} 
+                src={`https://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/${spellImg}`} 
                 width={spellSize} 
                 height={spellSize} 
                 alt={`Spell ${spellKey}`}

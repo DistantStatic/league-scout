@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react'
 import SummonerSpell from '../../../../spells/summoner-spells/summoner-spells';
 import SummonerItems from '../../../../items/summoner-items/summoner-items';
 import { SummonerContext } from "../../../../context-providers/summoner-context";
+import Champion from "../../../../champion/champion";
 
 export default function ParticipantItem({participant, team, detailed, playerSelector, playerIndex}: {
     playerIndex: number,
@@ -29,11 +30,10 @@ export default function ParticipantItem({participant, team, detailed, playerSele
             >
             <div className="flex flex-col w-2/5 justify-center">
                 <div className="flex flex-row justify-center">
-                    <Image 
-                        src={`/static/champions/${participant.championName}.png`} 
+                    <Champion 
+                        name={`${participant.championName}`} 
                         height={champImageSize} 
                         width={champImageSize} 
-                        alt={`${participant.championName} icon`}
                         />
                 </div>
                 <div className="flex flex-row items-center justify-center">
