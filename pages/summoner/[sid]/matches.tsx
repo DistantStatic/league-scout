@@ -7,6 +7,7 @@ import SummonerDetail from '../../../components/layouts/summoner-detail';
 import MatchModal from '../../../components/modals/match-modal';
 import PlayerModal from '../../../components/modals/player-modal';
 import SummonerContextProvider from '../../../components/context-providers/summoner-context';
+import ErrorDisplay from '../../../components/errors/error';
 
 export default function Matches(){
     const router = useRouter()
@@ -32,6 +33,7 @@ export default function Matches(){
         fetch(`/api/matches/${sid}?page=${currentPage}`)
         .then(async (resp) => {
             const data = await resp.json()
+            console.log(data)
             setMatches(data)
         })
         .catch(err => {
@@ -68,15 +70,26 @@ export default function Matches(){
         <MainLayout home={false} title={` ${sid} - Matches`}>
             <SummonerDetail summoner={sid}>
                 { loading ? <Loader /> : 
-                    <>
-                        {matches.length > 0 ? <MatchHistory 
-                            matchSelector={matchSelection}
-                            matches={matches}
-                            /> : ""}
-                    </>
+                        error ? <ErrorDisplay /> :
+                            matches.length > 0 ? 
+                                <><MatchHistory 
+                                    matchSelector={matchSelection}
+                                    matches={matches}
+                                    />
+                                <MatchModal 
+                                    show={matchModal}
+                                    hide={() => setMatchModal(false)}
+                                    match={matches[selectedMatch]}
+                                    playerSelector={playerSelection}
+                                    />
+                                <PlayerModal 
+                                    show={playerModal} 
+                                    hide={() => setPlayerModal(false)} 
+                                    participant={matches[selectedMatch]['info']['participants'][selectedPlayer]} 
+                                    /></>
+                                : <ErrorDisplay title={`${Number(page) > 0 ? 'No more matches to show' : 'No matches found'}`}/>
                 }
                 
-                {error ? <h1>Something went wrong :(</h1> : ''}
                 <div className="absolute bottom-2 w-full h-7">
                     <button className="bg-green-300 rounded-r-lg h-full w-1/12 float-left"
                         onClick={() => changePage(false)}
@@ -90,23 +103,7 @@ export default function Matches(){
                         <span className="antialiased font-semibold text-xl">{'>'}</span>
                     </button>
                 </div>
-            </SummonerDetail>
-            { loading ? '' : 
-                    matches.length > 0 ? 
-                    <>
-                        <MatchModal 
-                            show={matchModal}
-                            hide={() => setMatchModal(false)}
-                            match={matches[selectedMatch]}
-                            playerSelector={playerSelection}
-                            />
-                        <PlayerModal 
-                            show={playerModal} 
-                            hide={() => setPlayerModal(false)} 
-                            participant={matches[selectedMatch]['info']['participants'][selectedPlayer]} 
-                            />
-                    </> : ''
-                }
+                </SummonerDetail>
         </MainLayout>
         </SummonerContextProvider>
     )

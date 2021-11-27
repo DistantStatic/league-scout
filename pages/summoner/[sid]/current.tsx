@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 
 import MainLayout from "../../../components/layouts/main-layout"
 import SummonerDetail from "../../../components/layouts/summoner-detail"
-import Loader from "../../../components/loader/loader"
 import CurrentMatch from "../../../components/current-match/current-match"
+import Loader from "../../../components/loader/loader"
+import ErrorDisplay from "../../../components/errors/error"
 
 export default function CurrentMatchPage() {
     const [ inGame, setInGame ] = useState(false)
@@ -43,7 +44,7 @@ export default function CurrentMatchPage() {
                         // show current game data
                         <CurrentMatch matchData={matchData} playerSelector={()=>{}}/>
                         :
-                        'Not in game'// show not in game message
+                        <ErrorDisplay title="Not in game" />
             }
             </SummonerDetail>
         </MainLayout>
