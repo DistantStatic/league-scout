@@ -1,5 +1,4 @@
 import { CurrentMatchDto } from "../../interface-lib/match-lib/match-lib";
-import ParticipantList from "../match-history/match/participant-list/participant-list";
 import PlayerList from "./player-list/player-list";
 
 export default function CurrentMatch({matchData, playerSelector}: {
@@ -8,7 +7,7 @@ export default function CurrentMatch({matchData, playerSelector}: {
 }){
 
     return (
-        <div className="py-2">
+        <div className="mt-6 overflow-y-auto">
             <PlayerList playerList={matchData.participants} playerSelector={playerSelector} />
         </div>
     )
