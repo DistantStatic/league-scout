@@ -16,7 +16,7 @@ export default function DetailBar({summoner} : {summoner: string | string[]}){
         <div className=" h-min w-full bg-indigo-900 rounded-t-md flex space-x-4 sticky top-0 ">
             {
                 tabs.map((tab, index) => (
-                    <DetailBarItem key={index} itemText={tab.display} path={tab.path} summoner={summoner} />
+                    <DetailBarItem key={index} tabIndex={index} itemText={tab.display} path={tab.path} summoner={summoner} />
                 ))
             }
         </div>
