@@ -17,7 +17,13 @@ export default function Player({player, playerIndex, team, playerSelector}: {
     const champImageSize:string =  "50"
     const spellImageSize:string =  "25"
 
-    const [summonerInfo, setSummonerInfo ] = useState({})
+    
+    const [summonerInfo, setSummonerInfo] = useState({
+        name: '',
+        profileIconId: '',
+        summonerLevel: '',
+        rankedQueues: []
+    })
     const [error, setError] = useState(false)
     const [loading, setLoading ] = useState(true)
 
@@ -79,7 +85,7 @@ export default function Player({player, playerIndex, team, playerSelector}: {
                     {!loading?
                         !error ? 
                             <div>
-                                <PlayerDetails baseDetails={summonerInfo['base']} rankedDetails={summonerInfo['rankedQueues']} />
+                                <PlayerDetails baseDetails={summonerInfo} rankedDetails={summonerInfo['rankedQueues']} />
                             </div>
                         
                         : <h1>Something went wrong :(</h1> : ''

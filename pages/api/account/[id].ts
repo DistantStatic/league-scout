@@ -7,12 +7,11 @@ import { connectToDatabase } from "../../../utils/mongodb";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query
     const { db } = await connectToDatabase()
-    
     if (req.method === "GET") {
         const results = await db
                         .collection('summoner')
                         .findOne({
-                            name: id.toString()
+                            name: id.toString().replace('/', '').replace('\\', '').replace('\'', '').replace('"', '')
                         },
                         {
                             collation: {
@@ -37,9 +36,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 function touchRiot(id: string | string[], res: NextApiResponse, db: Db){
+    const requestedSummoner = encodeURIComponent(id.toString())
     axios({
         method: 'GET',
-        url: `summoner/v4/summoners/by-name/${id}`
+        url: `summoner/v4/summoners/by-name/${requestedSummoner}`
     })
     .then(response => {
         if (response.status !== 200) return res.status(503).send('Error finding summoner')

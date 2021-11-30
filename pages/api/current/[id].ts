@@ -15,12 +15,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse){
             url: `spectator/v4/active-games/by-summoner/${summonerResp.data.id}`
         })
         .then(matchResp => {
-            if (matchResp.status === 404) return res.status(404).send('Not in game')
             res.status(matchResp.status).send(matchResp.data)
         })
         .catch(err => {
             console.error(`Match Error: ${err}`)
-            res.status(400).send(err)
+            res.status(404).send(err)
         })
     })
     .catch(err => {
