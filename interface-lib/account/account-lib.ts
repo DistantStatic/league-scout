@@ -1,5 +1,11 @@
 export interface BuiltResponse {
-    base: AccountResponse,
+    id: string,
+    accountId: string,
+    puuid: string,
+    name: string,
+    profileIconId: number,
+    revisionDate: number,
+    summonerLevel: number,
     rankedQueues: Array<RankedResponse>
 }
 

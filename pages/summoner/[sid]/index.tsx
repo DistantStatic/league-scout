@@ -7,11 +7,17 @@ import RankedDetails from '../../../components/account/ranked-details/ranked-det
 import SummonerDetail from '../../../components/layouts/summoner-detail';
 import Loader from '../../../components/loader/loader';
 import ErrorDisplay from '../../../components/errors/error'
+import axios from 'axios';
 
 export default function AccountDetail(){
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
-    const [summonerInfo, setSummonerInfo] = useState({})
+    const [summonerInfo, setSummonerInfo] = useState({
+        name: '',
+        profileIconId: '',
+        summonerLevel: '',
+        rankedQueues: []
+    })
     const router = useRouter()
     const { sid } = router.query
 
@@ -32,13 +38,41 @@ export default function AccountDetail(){
             })
     }, [sid])
 
+    function updateData(){
+        fetch(`/api/account/${ sid }`, {method: "PUT"})
+            .then(async (resp) => {
+                if (resp.status !== 200) return setError(true)  
+                const data = await resp.json()
+                setSummonerInfo(data)
+            })
+            .catch(err =>{
+                console.log(err);
+                setError(true)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
     return(
         <MainLayout title={ sid }>
             <SummonerDetail summoner={sid}>
                     {loading ? <Loader /> : 
                         !error ? 
                             <div className="mt-7">
-                                <BaseDetails baseDetails={summonerInfo['base']} /> 
+                                <button 
+                                    name="refreshData" 
+                                    onClick={() => updateData()}
+                                    className="
+                                        bg-blue-400
+                                        outline-none
+                                        p-2
+                                        rounded
+                                        "
+                                    >
+                                    Refresh Data    
+                                </button>
+                                <BaseDetails baseDetails={summonerInfo} /> 
                                 <RankedDetails queues={summonerInfo['rankedQueues']} />
                             
                             </div>
