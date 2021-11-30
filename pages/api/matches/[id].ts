@@ -1,13 +1,17 @@
 import axios from '../../../axios-instances/summoner'
 import matchAxios from '../../../axios-instances/match-history'
 import { NextApiRequest, NextApiResponse } from "next";
+import { connectToDatabase } from '../../../utils/mongodb';
+import { Db } from 'mongodb';
 
 //grabbing X matches at a time to prevent rate limiting
 //will change once backend storage of data is implemented
 const matchCount: number = 6
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id, page }: { [key: string]: string | string[] } = req.query
+    const { db } = await connectToDatabase()
+
     axios({
         method: "GET",
         url: `summoner/v4/summoners/by-name/${id}`
@@ -21,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             url: `match/v5/matches/by-puuid/${resp.data.puuid}/ids?start=${start}&count=${matchCount}`
         })
         .then(resp => {
-            Promise.all(fetchDetails(resp.data))
+            Promise.all(fetchDetails(resp.data, db))
             .then(data => {
                 res.status(200).send(data)
             })
@@ -35,15 +39,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     })
 }
 
-function fetchDetails(matches: Array<any>) {
-    const data = matches.map(match => (
-            matchAxios({
+function fetchDetails(matches: Array<any>, db: Db) {
+    const data = matches.map( async match => {
+            console.log(match)
+            const results = await db.collection('matches').findOne({
+                "metadata.matchId": match.toString()
+            })
+            if (results) return results
+            console.log('match not found locally... touching riot')
+            return matchAxios({
                 method: "GET",
                 url: `match/v5/matches/${match}`
             })
-            .then(resp => {
+            .then( async resp => {
+                const insertResult = await db.collection('matches').insertOne(resp.data)
                 return resp.data
             })
-    ))
+        })
     return data
 }
