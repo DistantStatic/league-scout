@@ -3,7 +3,8 @@ import { RankedResponse } from '../../../../interface-lib/account/account-lib'
 
 const rankedQueueType = {
     "RANKED_SOLO_5x5": "Ranked Solo/Duo 5v5",
-    "RANKED_FLEX_SR": "Ranked Flex 5v5"
+    "RANKED_FLEX_SR": "Ranked Flex 5v5",
+    "RANKED_TFT_PAIRS": "Ranked TFT Pairs"
 }
 
 export default function RankedDetail({queue}: {queue: RankedResponse}){
