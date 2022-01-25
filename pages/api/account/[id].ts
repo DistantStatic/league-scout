@@ -4,12 +4,14 @@ import axios from '../../../axios-instances/summoner';
 import { BuiltResponse } from "../../../interface-lib/account/account-lib";
 import { connectToDatabase } from "../../../utils/mongodb";
 
+const COLLECTION_NAME = 'summoners'
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query
     const { db } = await connectToDatabase()
     if (req.method === "GET") {
         const results = await db
-                        .collection('summoner')
+                        .collection(COLLECTION_NAME)
                         .findOne({
                             name: id.toString().replace('/', '').replace('\\', '').replace('\'', '').replace('"', '')
                         },
@@ -53,11 +55,11 @@ function touchRiot(id: string | string[], res: NextApiResponse, db: Db){
             
             //define update query
             const query = {
-                name: id.toString()
+                lookup: id.toString()
             }
 
             const update = {
-                $set: {...builtResponse, retrievalDate: new Date()}
+                $set: {...builtResponse, retrievalDate: new Date(), lookup: id}
             }
             const options = {
                 upsert: true,
@@ -68,7 +70,7 @@ function touchRiot(id: string | string[], res: NextApiResponse, db: Db){
             }
             
             //act on query
-            db.collection('summoner').updateOne(query,update,options)
+            db.collection(COLLECTION_NAME).updateOne(query,update,options)
  
             res.status(200).json(builtResponse)
         })
