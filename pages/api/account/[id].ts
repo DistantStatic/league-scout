@@ -37,50 +37,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 }
 
-function touchRiot(id: string | string[], res: NextApiResponse, db: Db){
+async function touchRiot(id: string | string[], res: NextApiResponse, db: Db){
     const requestedSummoner = encodeURIComponent(id.toString())
-    axios({
+    
+    const summonerResponse = await axios({
         method: 'GET',
         url: `summoner/v4/summoners/by-name/${requestedSummoner}`
     })
-    .then(response => {
-        if (response.status !== 200) return res.status(503).send('Error finding summoner')
-        const builtResponse: BuiltResponse = {...response.data, rankedQueues: []}
-        axios({
-            method: 'GET',
-            url: `league/v4/entries/by-summoner/${response.data.id}`
-        })
-        .then(responseTwo => {
-            builtResponse.rankedQueues = responseTwo.data
-            
-            //define update query
-            const query = {
-                lookup: id.toString()
-            }
+    
+    if (summonerResponse.status !== 200) return res.status(503).send('Error finding summoner')
+    
+    const builtResponse: BuiltResponse = {...summonerResponse.data, rankedQueues: []}
+    
+    const leagueResponse = await axios({
+        method: 'GET',
+        url: `league/v4/entries/by-summoner/${summonerResponse.data.id}`
+    })
+    
+    builtResponse.rankedQueues = leagueResponse.data
+    
+    //define update query
+    const query = {
+        lookup: id.toString()
+    }
 
-            const update = {
-                $set: {...builtResponse, retrievalDate: new Date(), lookup: id}
-            }
-            const options = {
-                upsert: true,
-                collation: {
-                    locale: "en",
-                    strength: 2
-                }
-            }
-            
-            //act on query
-            db.collection(COLLECTION_NAME).updateOne(query,update,options)
- 
-            res.status(200).json(builtResponse)
-        })
-        .catch(err => {
-            console.log(`error inner: ${err}`);
-            res.status(400).send(err)
-        })
-    })
-    .catch(err => {
-        console.log(`error outer: ${err}`)
-        res.status(400).send(err)
-    })
+    const update = {
+        $set: {...builtResponse, retrievalDate: new Date(), lookup: id}
+    }
+    
+    const options = {
+        upsert: true,
+        collation: {
+            locale: "en",
+            strength: 2
+        }
+    }
+    
+    //act on query
+    db.collection(COLLECTION_NAME).updateOne(query,update,options)
+    res.status(200).json(builtResponse)
 }
